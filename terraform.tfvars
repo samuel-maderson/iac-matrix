@@ -17,13 +17,25 @@ eks = {
         ### common
         aws_region = "us-east-1"
         environment = "dev"
-        cluster_name = "vpc-matrix"
-        ### specifications
-        cluster_name = "vpc-matrix"
+        cluster_name = "eks-matrix"
         cluster_service_ipv4_cidr = "10.172.0.0/16"
         cluster_version = "1.30"
         cluster_endpoint_private_access = false
         cluster_endpoint_public_access = true
         cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]
         private_subnets = ["", ""]
+}
+
+eks_nodegroup = {
+    
+        ### common
+        aws_region = "us-east-1"
+        environment = "dev"
+        ### specifications
+        cluster_name = ""
+        cluster_version = ""
+        private_subnets = ["", ""]
+        desired_size = 2
+        max_size = 3
+        min_size = 2
 }
