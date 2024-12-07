@@ -13,6 +13,7 @@ scripts
 files
 iam_policy.json
 trivy.log
+docker-config.json
 
 eks-terraform-key.pem
 
