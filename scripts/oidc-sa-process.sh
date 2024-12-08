@@ -1,11 +1,10 @@
 #!/bin/bash
 
 REGION="us-east-1"
-#CLUSTER_NAME="matrix-eks-cluster"
-CLUSTER_NAME="dev-vpc-matrix"
-NAMESPACE="development"
-S3_POLICY="iam-policy-s3.json"
-ACCOUNT_ID="058264436363"
+APP_NAME="app2"
+CLUSTER_NAME="dev-eks-matrix"
+NAMESPACE="dev"
+ACCOUNT_ID="211125308281"
 
 
 # Create policies
@@ -33,8 +32,8 @@ eksctl utils associate-iam-oidc-provider \
 
 # create SA and Role for s3-app
 eksctl create iamserviceaccount \
-  --name app-dynamodb-iam-service-account \
-  --namespace development \
+  --name "${APP_NAME}-dynamodb-iam-service-account" \
+  --namespace $NAMESPACE \
   --cluster $CLUSTER_NAME \
   --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/${NAMESPACE}-dynamodb-policy \
   --approve
@@ -42,8 +41,8 @@ eksctl create iamserviceaccount \
 
 # create SA and Role for dynamodb-app
 eksctl create iamserviceaccount \
-  --name app-s3-iam-service-account \
-  --namespace development \
+  --name "${APP_NAME}-s3-iam-service-account" \
+  --namespace $NAMESPACE \
   --cluster $CLUSTER_NAME \
   --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/${NAMESPACE}-s3-policy \
   --approve

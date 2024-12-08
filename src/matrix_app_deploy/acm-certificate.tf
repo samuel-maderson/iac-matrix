@@ -1,6 +1,6 @@
 # Resource: ACM Certificate
 resource "aws_acm_certificate" "acm_cert" {
-  domain_name       = "*.smml.link"
+  domain_name       = "*.211125308281.realhandsonlabs.net"
   validation_method = "DNS"
 
   tags = {

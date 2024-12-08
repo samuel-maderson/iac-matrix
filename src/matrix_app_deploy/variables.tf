@@ -3,7 +3,6 @@ variable "app_deploy" {
       ### common
       aws_region = string
       environment = string
-      business_divsion = string
       # specifications
       cluster_name = string
       cluster_endpoint = string

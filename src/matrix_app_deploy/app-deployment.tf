@@ -1,10 +1,10 @@
 # Kubernetes Deployment Manifest
 resource "kubernetes_deployment_v1" "myapp1" {
   metadata {
-    name = "smmlwebsite-deployment"
+    name = "matrix-deployment"
     namespace = "dev"
     labels = {
-      app = "smmlwebsite"
+      app = "matrix"
     }
   } 
  
@@ -13,29 +13,25 @@ resource "kubernetes_deployment_v1" "myapp1" {
 
     selector {
       match_labels = {
-        app = "smmlwebsite"
+        app = "matrix"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "smmlwebsite"
+          app = "matrix"
         }
       }
 
       spec {
         container {
-          image = "samuelmadersondev/smml-website:latest"
-          name  = "smmlwebsite"
+          image = "nginx:latest"
+          name  = "matrix"
           port {
             container_port = 80
           }
           }
-        image_pull_secrets {
-          name = "my-dockerhub-secret"
-        }
-
       }
     }
   }

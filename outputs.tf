@@ -87,3 +87,20 @@ output "cluster_primary_security_group_id" {
   description = "The cluster primary security group ID created by the EKS cluster on 1.14 or later. Referred to as 'Cluster security group' in the EKS console."
   value       = module.matrix_eks.cluster_primary_security_group_id
 }
+
+#####################################################
+################### OIDC PROVIDER ###################
+#####################################################
+
+# Output: AWS IAM Open ID Connect Provider ARN
+output "aws_iam_openid_connect_provider_arn" {
+  description = "AWS IAM Open ID Connect Provider ARN"
+  value = module.matrix_oidc_provider.aws_iam_openid_connect_provider_arn
+}
+
+
+# Output: AWS IAM Open ID Connect Provider
+output "aws_iam_openid_connect_provider_extract_from_arn" {
+  description = "AWS IAM Open ID Connect Provider extract from ARN"
+   value = module.matrix_oidc_provider.aws_iam_openid_connect_provider_extract_from_arn
+}

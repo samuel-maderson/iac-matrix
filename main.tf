@@ -66,19 +66,50 @@ module "matrix_oidc_provider" {
 }
 
 
-# module "matrix_eks_albc" {
-#   source = "./src/eks_albc"
+module "matrix_albc" {
+  source = "./src/matrix_albc"
+  
+  eks_albc = {
 
-#   eks = {
+      aws_region = var.vpc.aws_region
+      environment = var.vpc.environment
+      cluster_name = var.eks.cluster_name
+      aws_iam_openid_connect_provider_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_arn
+      aws_iam_openid_connect_provider_extract_from_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_extract_from_arn
+      cluster_certificate_authority_data = module.matrix_eks.cluster_certificate_authority_data
+      cluster_endpoint = module.matrix_eks.cluster_endpoint
+      cluster_id = module.matrix_eks.cluster_id
+      vpc_id = module.matrix_vpc.vpc_id
+  }
+}
 
-#       aws_region = var.vpc.aws_region
-#       environment = var.vpc.environment
-#       cluster_name = var.eks.cluster_name
-#       aws_iam_openid_connect_provider_arn = var.eks_albc.aws_iam_openid_connect_provider_arn
-#       aws_iam_openid_connect_provider_extract_from_arn = var.eks_albc.aws_iam_openid_connect_provider_extract_from_arn
-#       cluster_certificate_authority_data = var.eks_albc.cluster_certificate_authority_data
-#       cluster_endpoint = 
-#       cluster_id = string
-#       vpc_id = string
-#   }
-# }
+
+module "matrix_externaldns" {
+  source = "./src/matrix_externaldns"
+
+  externaldns = {
+    aws_region = var.vpc.aws_region
+    environment = var.vpc.environment
+    cluster_name = var.eks.cluster_name
+    vpc_id = module.matrix_vpc.vpc_id
+    cluster_id = module.matrix_eks.cluster_id
+    cluster_name = module.matrix_eks.cluster_name
+    cluster_endpoint = module.matrix_eks.cluster_endpoint
+    cluster_certificate_authority_data = module.matrix_eks.cluster_certificate_authority_data
+    aws_iam_openid_connect_provider_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_arn
+    aws_iam_openid_connect_provider_extract_from_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_extract_from_arn
+  }
+}
+
+module "matrix_app_deploy" {
+  source = "./src/matrix_app_deploy"
+
+  app_deploy = {
+    aws_region = var.vpc.aws_region
+    environment = var.vpc.environment
+    cluster_name = var.eks.cluster_name
+    cluster_endpoint = module.matrix_eks.cluster_endpoint
+    cluster_id = module.matrix_eks.cluster_id
+    cluster_certificate_authority_data = module.matrix_eks.cluster_certificate_authority_data
+  }
+}

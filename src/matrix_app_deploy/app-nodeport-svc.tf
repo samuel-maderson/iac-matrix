@@ -1,7 +1,7 @@
 # Kubernetes Service Manifest (Type: Node Port Service)
 resource "kubernetes_service_v1" "myapp1_np_service" {
   metadata {
-    name = "smmlwebsite-nodeport-service"
+    name = "matrix-nodeport-service"
     namespace = "dev"
     annotations = {
       "alb.ingress.kubernetes.io/healthcheck-path" = "/en/index.html"

@@ -34,17 +34,17 @@ resource "helm_release" "loadbalancer_controller" {
 
   set {
     name  = "vpcId"
-    value = "${var.albc.vpc_id}"
+    value = "${var.eks_albc.vpc_id}"
   }  
 
   set {
     name  = "region"
-    value = "${var.albc.aws_region}"
+    value = "${var.eks_albc.aws_region}"
   }    
 
   set {
     name  = "clusterName"
-    value = "${var.albc.cluster_id}"
+    value = "${var.eks_albc.cluster_id}"
   }    
     
 }

@@ -4,7 +4,6 @@ variable "externaldns" {
     ### common
     aws_region = string
     environment = string
-    business_divsion = string
     cluster_name = string
     cluster_id = string
     cluster_endpoint = string

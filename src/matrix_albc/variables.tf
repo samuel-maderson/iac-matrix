@@ -1,9 +1,7 @@
-variable "albc" {
+variable "eks_albc" {
   type = object({
-    ### common
     aws_region = string
     environment = string
-    business_divsion = string
     cluster_name = string
     aws_iam_openid_connect_provider_arn = string
     aws_iam_openid_connect_provider_extract_from_arn = string

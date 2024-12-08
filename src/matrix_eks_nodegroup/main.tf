@@ -1,5 +1,5 @@
 # Create AWS EKS Node Group - Private
-resource "aws_eks_node_group" "eks_ng_private" {
+resource "aws_eks_node_group" "eks_private" {
   cluster_name    = var.eks_nodegroup.cluster_name
 
   node_group_name = "${local.name}-eks-private"
