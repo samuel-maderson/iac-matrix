@@ -1,10 +1,7 @@
 vpc = {
-        ### common
         aws_region = "us-east-1"
         environment = "dev"
         cluster_name = "eks-matrix"
-
-        ### specifications
         vpc_name = "vpc-matrix"
         vpc_cidr_block = "10.0.0.0/16"
         #vpc_availability_zones = ["us-east-1a", "us-east-1b"]
@@ -14,9 +11,8 @@ vpc = {
 }
 
 eks = {
-        ### common
-        aws_region = "us-east-1"
-        environment = "dev"
+        aws_region = ""
+        environment = ""
         cluster_name = "eks-matrix"
         cluster_service_ipv4_cidr = "10.172.0.0/16"
         cluster_version = "1.30"
@@ -27,11 +23,8 @@ eks = {
 }
 
 eks_nodegroup = {
-    
-        ### common
-        aws_region = "us-east-1"
-        environment = "dev"
-        ### specifications
+        aws_region = ""
+        environment = ""
         cluster_name = ""
         cluster_version = ""
         private_subnets = ["", ""]
@@ -39,3 +32,24 @@ eks_nodegroup = {
         max_size = 3
         min_size = 2
 }
+
+
+eks_oidc_provider = {
+        aws_region = ""
+        environment = ""
+        cluster_name = ""
+        cluster_oidc_issuer_url = ""
+        eks_oidc_root_ca_thumbprint = "f69fcb00bd04230745a986df5630a232d1a3e3c6"
+}
+
+# eks_albc = {
+#       aws_region = var.vpc.aws_region
+#       environment = var.vpc.environment
+#       cluster_name = var.eks.cluster_name
+#       aws_iam_openid_connect_provider_arn = var.eks_albc.aws_iam_openid_connect_provider_arn
+#       aws_iam_openid_connect_provider_extract_from_arn = var.eks_albc.aws_iam_openid_connect_provider_extract_from_arn
+#       cluster_certificate_authority_data = var.eks_albc.cluster_certificate_authority_data
+#       cluster_endpoint = 
+#       cluster_id = string
+#       vpc_id = string
+# }

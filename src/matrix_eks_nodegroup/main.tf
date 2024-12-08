@@ -2,7 +2,7 @@
 resource "aws_eks_node_group" "eks_ng_private" {
   cluster_name    = var.eks_nodegroup.cluster_name
 
-  node_group_name = "${local.name}-eks-ng-private"
+  node_group_name = "${local.name}-eks-private"
   node_role_arn   = aws_iam_role.eks_nodegroup_role.arn
   subnet_ids      = var.eks_nodegroup.private_subnets
   version = var.eks_nodegroup.cluster_version #(Optional: Defaults to EKS Cluster Kubernetes version)    

@@ -1,11 +1,9 @@
 variable "vpc" {
   type = object({
-    ### common
     aws_region = string
     environment = string
     cluster_name = string
     
-    ### specifications
     vpc_name = string
     vpc_cidr_block = string
     //vpc_availability_zones = list(string)
@@ -17,10 +15,8 @@ variable "vpc" {
 
 variable "eks" {
   type = object({
-    ### common
     aws_region = string
     environment = string
-    ### specifications
     cluster_name = string
     cluster_service_ipv4_cidr = string
     cluster_version = string
@@ -35,11 +31,9 @@ variable "eks" {
 
 variable "eks_nodegroup" {
   type = object({
-    ### common
     aws_region = string
     environment = string
     cluster_name = string
-    ### specifications
     cluster_version = string 
     private_subnets = list(string)
     desired_size = number
@@ -47,3 +41,29 @@ variable "eks_nodegroup" {
     min_size = number
   })
 }
+
+
+variable "eks_oidc_provider" {
+  type = object({
+    aws_region = string
+    environment = string
+    cluster_name = string
+    cluster_oidc_issuer_url = string
+    eks_oidc_root_ca_thumbprint = string
+  })
+}
+# variable "eks_albc" {
+#   type = object({
+#  
+#     aws_region = string
+#     environment = string
+#     business_divsion = string
+#     cluster_name = string
+#     aws_iam_openid_connect_provider_arn = string
+#     aws_iam_openid_connect_provider_extract_from_arn = string
+#     cluster_certificate_authority_data = string
+#     cluster_endpoint = string
+#     cluster_id = string
+#     vpc_id = string
+#   })
+# }

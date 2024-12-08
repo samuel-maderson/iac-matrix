@@ -19,8 +19,8 @@ module "matrix_eks" {
 
   eks = {
 
-      aws_region = var.eks.aws_region
-      environment = var.eks.environment
+      aws_region = var.vpc.aws_region
+      environment = var.vpc.environment
       cluster_name = var.eks.cluster_name
       cluster_service_ipv4_cidr = var.eks.cluster_service_ipv4_cidr
       cluster_version = var.eks.cluster_version
@@ -38,8 +38,8 @@ module "matrix_eks_nodegroup" {
 
   eks_nodegroup = {
     
-      aws_region = var.eks_nodegroup.aws_region
-      environment = var.eks_nodegroup.environment
+      aws_region = var.vpc.aws_region
+      environment = var.vpc.environment
       cluster_name = module.matrix_eks.cluster_name
       cluster_version = module.matrix_eks.cluster_version
       private_subnets = module.matrix_vpc.public_subnets
@@ -50,3 +50,35 @@ module "matrix_eks_nodegroup" {
 
   depends_on = [ module.matrix_eks ]
 }
+
+module "matrix_oidc_provider" {
+  source = "./src/matrix_oidc_provider"
+
+  eks_oidc_provider = {
+    aws_region = var.vpc.aws_region
+    environment = var.vpc.environment
+    cluster_name = module.matrix_eks.cluster_name
+    cluster_oidc_issuer_url = module.matrix_eks.cluster_oidc_issuer_url
+    eks_oidc_root_ca_thumbprint = "f69fcb00bd04230745a986df5630a232d1a3e3c6"
+  }
+
+  depends_on = [ module.matrix_eks_nodegroup ]
+}
+
+
+# module "matrix_eks_albc" {
+#   source = "./src/eks_albc"
+
+#   eks = {
+
+#       aws_region = var.vpc.aws_region
+#       environment = var.vpc.environment
+#       cluster_name = var.eks.cluster_name
+#       aws_iam_openid_connect_provider_arn = var.eks_albc.aws_iam_openid_connect_provider_arn
+#       aws_iam_openid_connect_provider_extract_from_arn = var.eks_albc.aws_iam_openid_connect_provider_extract_from_arn
+#       cluster_certificate_authority_data = var.eks_albc.cluster_certificate_authority_data
+#       cluster_endpoint = 
+#       cluster_id = string
+#       vpc_id = string
+#   }
+# }

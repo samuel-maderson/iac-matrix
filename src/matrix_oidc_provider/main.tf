@@ -5,12 +5,12 @@ data "aws_partition" "current" {}
 # Resource: AWS IAM Open ID Connect Provider
 resource "aws_iam_openid_connect_provider" "oidc_provider" {
   client_id_list  = ["sts.${data.aws_partition.current.dns_suffix}"]
-  thumbprint_list = [var.ng_oidc_provider.eks_oidc_root_ca_thumbprint]
-  url             = var.ng_oidc_provider.cluster_oidc_issuer_url
+  thumbprint_list = [var.eks_oidc_provider.eks_oidc_root_ca_thumbprint]
+  url             = var.eks_oidc_provider.cluster_oidc_issuer_url
 
   tags = merge(
     {
-      Name = "${var.ng_oidc_provider.cluster_name}-eks-irsa"
+      Name = "${var.eks_oidc_provider.cluster_name}-eks-irsa"
     },
     local.common_tags
   )
