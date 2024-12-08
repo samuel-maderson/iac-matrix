@@ -9,7 +9,6 @@
 crash.log
 crash.*.log
 
-scripts
 files
 iam_policy.json
 trivy.log

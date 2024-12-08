@@ -1,0 +1,20 @@
+Description: S3 IAM Policy
+Parameters:
+  Namespace:
+    Description: The namespace which this s3 belongs to
+    Type: String
+    Default: development
+Resources:
+  IamPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action: "*"
+          Resource: "*"
+      ManagedPolicyName: !Sub "${Namespace}-s3-policy"
+Outputs:
+  IamPolicyArn:
+    Value: !Ref IamPolicy
