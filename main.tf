@@ -81,24 +81,7 @@ module "matrix_albc" {
       cluster_id = module.matrix_eks.cluster_id
       vpc_id = module.matrix_vpc.vpc_id
   }
-}
 
-
-module "matrix_externaldns" {
-  source = "./src/matrix_externaldns"
-
-  externaldns = {
-    aws_region = var.vpc.aws_region
-    environment = var.vpc.environment
-    cluster_name = var.eks.cluster_name
-    vpc_id = module.matrix_vpc.vpc_id
-    cluster_id = module.matrix_eks.cluster_id
-    cluster_name = module.matrix_eks.cluster_name
-    cluster_endpoint = module.matrix_eks.cluster_endpoint
-    cluster_certificate_authority_data = module.matrix_eks.cluster_certificate_authority_data
-    aws_iam_openid_connect_provider_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_arn
-    aws_iam_openid_connect_provider_extract_from_arn = module.matrix_oidc_provider.aws_iam_openid_connect_provider_extract_from_arn
-  }
 }
 
 module "matrix_app_deploy" {

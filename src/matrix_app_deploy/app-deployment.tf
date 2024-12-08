@@ -9,7 +9,7 @@ resource "kubernetes_deployment_v1" "myapp1" {
   } 
  
   spec {
-    replicas = 1
+    replicas = 2
 
     selector {
       match_labels = {
@@ -26,7 +26,7 @@ resource "kubernetes_deployment_v1" "myapp1" {
 
       spec {
         container {
-          image = "nginx:latest"
+          image = "992382477890.dkr.ecr.us-east-1.amazonaws.com/matrix-ecr:myapp1_v4"
           name  = "matrix"
           port {
             container_port = 80

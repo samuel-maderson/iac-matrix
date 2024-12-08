@@ -29,6 +29,21 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSVPCResourceController" {
   role       = aws_iam_role.eks_master_role.name
 }
 
+resource "aws_iam_role_policy" "ecr_access" {
+  role = aws_iam_role.eks_master_role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = ["ecr:GetAuthorizationToken", "ecr:BatchCheckLayerAvailability", "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage"],
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 /*
 #  Optionally, enable Security Groups for Pods
 #  Reference: https://docs.aws.amazon.com/eks/latest/userguide/security-groups-for-pods.html
